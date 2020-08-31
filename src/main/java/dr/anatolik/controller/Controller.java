@@ -13,17 +13,36 @@ public class Controller {
     private final Printer printer = new Printer();
 
 
-    public void startDialog() {
-        System.out.println(printer.printGrid(grid));
-        System.out.println("\nSelect number 0 - 99");
-        int answer = getIntAnswer();
-        grid.updateCell(answer);
-        startDialog();
+    public void startGame() {
+        boolean continueGame = true;
+        while (continueGame) {
+            System.out.print(printer.printGrid(grid));
+            System.out.print("\nSelect number 0 - 99 or 'STOP' to stop game ");
+            String answer = getAnswer();
+            if ("STOP".equalsIgnoreCase(answer)) {
+                continueGame = false;
+            } else {
+                int cellNumber = getIntAnswer(answer);
+                if (cellNumber == -1) {
+                    System.out.println("WRONG NUMBER! Try again...");
+                } else {
+                    grid.updateCell(cellNumber);
+                }
+            }
+        }
     }
 
-    private static int getIntAnswer() {
-        String inputString = getAnswer();
-        return Integer.parseInt(inputString);
+    private static int getIntAnswer(String inputString) {
+        int result;
+        try {
+            result = Integer.parseInt(inputString);
+            if (result < 0 || result > 99) {
+                result = -1;
+            }
+        } catch (NumberFormatException e) {
+            result = -1;
+        }
+        return result;
     }
 
     private static String getAnswer() {
@@ -34,6 +53,6 @@ public class Controller {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return inputString;
+        return inputString.trim();
     }
 }
