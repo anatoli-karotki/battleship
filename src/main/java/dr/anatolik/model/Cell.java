@@ -3,6 +3,7 @@ package dr.anatolik.model;
 public class Cell {
 
     int number;
+    boolean isPartOfShip;
     boolean isSelected;
 
     public Cell(int val) {
@@ -15,6 +16,14 @@ public class Cell {
 
     public void setNumber(int number) {
         this.number = number;
+    }
+
+    public boolean isPartOfShip() {
+        return isPartOfShip;
+    }
+
+    public void setPartOfShip(boolean partOfShip) {
+        isPartOfShip = partOfShip;
     }
 
     public boolean isSelected() {

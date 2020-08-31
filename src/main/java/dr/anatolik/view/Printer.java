@@ -19,17 +19,24 @@ public class Printer {
     }
 
     private String addCell(Cell cell) {
-        String cellView = getSeparator(cell);
+        if (cell.isSelected()) {
+            String cellView = "  ";
+            if (cell.isPartOfShip()) {
+                cellView += "x";
+            } else {
+                cellView += "-";
+            }
+            cellView += " |";
+            return cellView;
+        }
+        return addDefaultCell(cell);
+    }
+
+    private String addDefaultCell(Cell cell) {
+        String cellView = " ";
         if (cell.getNumber() < 10) {
             cellView = " " + cellView;
         }
-        return cellView + cell.getNumber() + getSeparator(cell) + "|";
-    }
-
-    private String getSeparator(Cell cell) {
-        if (cell.isSelected()) {
-            return "*";
-        }
-        return " ";
+        return cellView + cell.getNumber() + " |";
     }
 }
