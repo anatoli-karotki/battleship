@@ -9,7 +9,7 @@ import java.io.InputStreamReader;
 
 public class Controller {
 
-    private final Grid grid = new Grid(10); //todo: move to dialog
+    private final Grid grid = new Grid(10);
     private final Printer printer = new Printer();
 
 
